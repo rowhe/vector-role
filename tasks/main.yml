@@ -1,0 +1,16 @@
+---
+# tasks file for vector-role
+- name: Install vector
+  become: true
+  ansible.builtin.apt:
+    deb: https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_amd64.deb
+- name: Copying vector config from template
+  ansible.builtin.template:
+    src: templates/vector.conf.j2
+    dest: /etc/vector/vector.toml
+    mode: 0644
+- name: Copying service unit file
+  ansible.builtin.template:
+    src: templates/vector.service.j2
+    dest: /etc/init.d/vector
+    mode: 0755

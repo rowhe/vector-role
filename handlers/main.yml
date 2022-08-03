@@ -1,0 +1,6 @@
+---
+- name: Starting Vector
+  ansible.builtin.service:
+    name: vector
+    pattern: vector
+    state: started
